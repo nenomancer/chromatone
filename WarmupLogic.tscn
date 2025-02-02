@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cojkoakch0vr"]
-
-[ext_resource type="Script" path="res://WarmupManager.gd" id="1_3wigy"]
-
-[node name="WarmupLogic" type="Node"]
-script = ExtResource("1_3wigy")
-
-[node name="NotePlayer" type="AudioStreamPlayer2D" parent="."]
