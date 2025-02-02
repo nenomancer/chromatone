@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://bongvo7vnsjqj"]
+
+[ext_resource type="Script" path="res://GameManager.gd" id="1_5xchl"]
+[ext_resource type="Script" path="res://Button.gd" id="1_w0mkp"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 2
+text = "This is the score
+"
+
+[node name="InfoLabel" type="Label" parent="UI"]
+layout_mode = 2
+text = "These are the color note pairs, feel free to click around"
+
+[node name="ColorButtons" type="GridContainer" parent="UI"]
+layout_mode = 2
+columns = 7
+
+[node name="Button1" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+script = ExtResource("1_w0mkp")
+
+[node name="Button2" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button3" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button4" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button5" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button6" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Button7" type="Button" parent="UI/ColorButtons"]
+layout_mode = 2
+text = "Button"
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_5xchl")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=3 uid="uid://bongvo7vnsjqj"]
+
+[ext_resource type="Script" path="res://GameManager.gd" id="1_5xchl"]
+[ext_resource type="Script" path="res://Button.gd" id="1_w0mkp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nu0j5"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ChromatoneUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 1920.0
+size_flags_vertical = 3
+
+[node name="ScoreLabel" type="Label" parent="UI/ChromatoneUI"]
+layout_mode = 2
+offset_top = 486.0
+offset_right = 1080.0
+offset_bottom = 509.0
+text = "This is the score
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/ChromatoneUI"]
+layout_mode = 2
+offset_top = 513.0
+offset_right = 1080.0
+offset_bottom = 529.0
+theme_override_constants/margin_bottom = 16
+
+[node name="InfoLabel" type="Label" parent="UI/ChromatoneUI"]
+layout_mode = 2
+offset_top = 533.0
+offset_right = 1080.0
+offset_bottom = 556.0
+text = "These are the color note pairs, feel free to click around"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI/ChromatoneUI"]
+layout_mode = 2
+offset_top = 560.0
+offset_right = 1080.0
+offset_bottom = 576.0
+theme_override_constants/margin_bottom = 16
+
+[node name="ColorButtons" type="GridContainer" parent="UI/ChromatoneUI"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+offset_top = 580.0
+offset_right = 1080.0
+offset_bottom = 700.0
+theme_override_constants/h_separation = 24
+columns = 7
+
+[node name="Button1" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button2" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button3" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button4" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button5" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button6" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="Button7" type="Button" parent="UI/ChromatoneUI/ColorButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = SubResource("CanvasTexture_nu0j5")
+script = ExtResource("1_w0mkp")
+
+[node name="DialogueUI" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 4.0
+offset_right = 1080.0
+offset_bottom = 4.0
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_5xchl")
+
+[node name="SceneContainer" type="Node" parent="."]
