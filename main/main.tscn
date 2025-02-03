@@ -13,19 +13,11 @@ script = ExtResource("1_hojuv")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 283.0
-offset_top = 138.0
-offset_right = 383.0
-offset_bottom = 169.0
+offset_left = 246.0
+offset_top = 347.0
+offset_right = 831.0
+offset_bottom = 828.0
 text = "Load level 1"
-
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 403.0
-offset_top = 138.0
-offset_right = 503.0
-offset_bottom = 169.0
-text = "Load level 2"
 
 [node name="GameUI" type="Control" parent="."]
 anchors_preset = 0
@@ -33,4 +25,3 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

@@ -23,3 +23,30 @@ offset_bottom = 242.0
 grow_horizontal = 2
 text = "Correct Note: [ ] | Guessed Note: [ ] | Discovered Notes: [ ]"
 horizontal_alignment = 1
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 130.0
+offset_right = 492.0
+offset_bottom = 161.0
+text = "Load main menu"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 128.0
+offset_right = 717.0
+offset_bottom = 159.0
+text = "Load level ui"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
