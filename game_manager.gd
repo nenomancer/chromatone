@@ -3,9 +3,10 @@ extends Node
 var available_notes = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
-var discovered_notes = []
+var discovered_notes = ["A", "B", "C"]
 var current_round: int = 1
-var current_level: int = 0
+var current_level: int = 1
+var current_score: int = 0
 
 var color_note_pairs = {}
 var current_note: String
@@ -38,19 +39,24 @@ func play_note(note):
 		_note_audio_player.stream = _note_sound_map[note]
 		_note_audio_player.play()
 
-func get_random_note(_all_notes: bool = false) -> String:
-	print("getting random note...")
-	print("discovered notes: " + var_to_str(discovered_notes))
+
+func get_random_note2(_all_notes: bool = false) -> String:
 	if (_all_notes):
 		return available_notes.pick_random()
 	
 	return discovered_notes.pick_random()
+
+func get_random_note(_note_array) -> String:
+	return _note_array.pick_random()
 
 func add_discovered_note(note: String):
 	discovered_notes.append(note)
 	
 func get_discovered_notes() -> Array:
 	return discovered_notes
+
+func get_undiscovered_notes() -> Array:
+	return available_notes.filter(func(element): return not discovered_notes.has(element))
 
 func set_round(new_round: int):
 	current_round = new_round
@@ -84,3 +90,20 @@ func randomize_pairs():
 			"color": color,
 			"sound": _note_sound_map[note]
 		}
+
+func get_melody():
+	var melody: Array
+	var previous_note: String = ""
+	for i in range(discovered_notes.size()):
+		var note = discovered_notes.pick_random()
+		while (note == previous_note):
+			note = discovered_notes.pick_random()
+		previous_note = note
+		melody.append(note)
+	return melody
+
+func get_score() -> int:
+	return current_score
+	
+func set_score(new_score: int):
+	current_score = new_score

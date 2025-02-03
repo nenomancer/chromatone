@@ -27,7 +27,7 @@ func disable_buttons():
 		
 func on_button_pressed(button):
 	emit_signal("note_selected", button.get_meta("note"))
-	disable_buttons()
+	#disable_buttons()
 
 func assign_color_to_buttons(condition: Callable):
 	var note_list = color_note_pairs.keys() # Get notes 
@@ -37,6 +37,7 @@ func assign_color_to_buttons(condition: Callable):
 		var button = buttons[i]
 		var note = note_list[i]
 		var color = color_note_pairs[note]["color"]
+		#button.text = note # For debugging
 		if condition.call(note, i): 
 			button.modulate = color
 			button.set_meta("note", note)
