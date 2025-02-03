@@ -11,7 +11,7 @@ func _ready():
 	
 	var buttons_ui = load("res://buttons_ui/buttons_ui.tscn").instantiate()
 	$UI.add_child(buttons_ui)
-	buttons_ui.assign_color_to_buttons(func(note, i): return note in GameManager.available_notes)
+	buttons_ui.assign_color_to_buttons(func(note, i): return note in GameManager.get_discovered_notes())
 	buttons_ui.note_selected.connect(on_level_guess)
 	
 func on_level_guess(note):
@@ -20,7 +20,7 @@ func on_level_guess(note):
 		print("CORRECT!")
 	else:
 		print("Incorrect!")
-	print("guessed note: ", note)
+	print("guessed note: ", note, ' correct note was: ', _correct_note)
 	$InfoLabel.text = "Current round: " + var_to_str(GameManager.get_round()) + " Current Level: " + var_to_str(GameManager.get_level())
 	
 	await get_tree().create_timer(2).timeout

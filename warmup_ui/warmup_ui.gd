@@ -5,7 +5,7 @@ var _correct_note: String
 
 
 func _ready():
-	_correct_note = GameManager.get_random_note() # Generate correct note
+	_correct_note = GameManager.get_random_note(true) # Generate correct note
 	
 	var buttons_ui = load("res://buttons_ui/buttons_ui.tscn").instantiate()
 	$UI.add_child(buttons_ui)
@@ -17,7 +17,7 @@ func on_warmup_guess(note):
 	print("warmup note is: ", note)
 	GameManager.play_note(note)
 	
-	if (_correct_note == note):
+	if (_correct_note == note || _current_round > 2):
 		if (note not in GameManager.discovered_notes):
 			GameManager.add_discovered_note(note)
 		# Points and whatnot

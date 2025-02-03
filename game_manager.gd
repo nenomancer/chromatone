@@ -6,10 +6,10 @@ var available_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.
 var discovered_notes = []
 var current_round: int = 1
 var current_level: int = 0
-var current_note: String
 
 var color_note_pairs = {}
-var note_sound_map = {
+var current_note: String
+var _note_sound_map = {
 	"C": preload("res://sounds/grand_piano_c.wav"),
 	"D": preload("res://sounds/grand_piano_d.wav"),
 	"E": preload("res://sounds/grand_piano_e.wav"),
@@ -19,7 +19,7 @@ var note_sound_map = {
 	"B": preload("res://sounds/grand_piano_b.wav")
 }
 
-var note_audio_player = AudioStreamPlayer.new()
+var _note_audio_player = AudioStreamPlayer.new()
 
 const LEVELS_UI = "res://levels_ui/levels_ui.tscn"
 const WARMUP_UI = "res://warmup_ui/warmup_ui.tscn"
@@ -31,15 +31,20 @@ func _ready() -> void:
 
 func generate_audio_player():
 	await get_tree().process_frame
-	get_tree().root.add_child(note_audio_player)
+	get_tree().root.add_child(_note_audio_player)
 	
 func play_note(note):
-	if note_audio_player:
-		note_audio_player.stream = note_sound_map[note]
-		note_audio_player.play()
+	if _note_audio_player:
+		_note_audio_player.stream = _note_sound_map[note]
+		_note_audio_player.play()
 
-func get_random_note() -> String:
-	return available_notes.pick_random()
+func get_random_note(_all_notes: bool = false) -> String:
+	print("getting random note...")
+	print("discovered notes: " + var_to_str(discovered_notes))
+	if (_all_notes):
+		return available_notes.pick_random()
+	
+	return discovered_notes.pick_random()
 
 func add_discovered_note(note: String):
 	discovered_notes.append(note)
@@ -77,5 +82,5 @@ func randomize_pairs():
 		
 		color_note_pairs[note] = {
 			"color": color,
-			"sound": note_sound_map[note]
+			"sound": _note_sound_map[note]
 		}
