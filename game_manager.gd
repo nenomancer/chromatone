@@ -1,16 +1,16 @@
 extends Node
 
-var available_notes = ["C", "D", "E", "F", "G", "A", "B"]
-var available_colors = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
+var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
+var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
-var discovered_notes = ["A", "B", "C"]
+var discovered_notes: Array = []
 var current_round: int = 1
 var current_level: int = 1
 var current_score: int = 0
 
-var color_note_pairs = {}
+var color_note_pairs: Dictionary = {}
 var current_note: String
-var _note_sound_map = {
+var _note_sound_map: Dictionary = {
 	"C": preload("res://sounds/grand_piano_c.wav"),
 	"D": preload("res://sounds/grand_piano_d.wav"),
 	"E": preload("res://sounds/grand_piano_e.wav"),
@@ -20,23 +20,25 @@ var _note_sound_map = {
 	"B": preload("res://sounds/grand_piano_b.wav")
 }
 
-var _note_audio_player = AudioStreamPlayer.new()
+var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
-const LEVELS_UI = "res://levels_ui/levels_ui.tscn"
-const WARMUP_UI = "res://warmup_ui/warmup_ui.tscn"
-const MAIN = "res://main/main.tscn"
+const LEVELS_UI: String = "res://levels_ui/levels_ui.tscn"
+const WARMUP_UI: String = "res://warmup_ui/warmup_ui.tscn"
+const MAIN: String = "res://main/main.tscn"
 
 func _ready() -> void:
 	generate_audio_player()
 	randomize_pairs()
 
-func generate_audio_player():
+func generate_audio_player() -> void:
 	await get_tree().process_frame
 	get_tree().root.add_child(_note_audio_player)
 	
-func play_note(note):
+func play_note(note) -> void:
 	if _note_audio_player:
 		_note_audio_player.stream = _note_sound_map[note]
+		_note_audio_player.volume_db = -7.0
+		#_note_audio_player.pitch_scale = 7
 		_note_audio_player.play()
 
 
@@ -60,7 +62,7 @@ func get_undiscovered_notes() -> Array:
 
 func set_round(new_round: int):
 	current_round = new_round
-	
+
 func get_round() -> int:
 	return current_round
 	
@@ -73,7 +75,7 @@ func get_level() -> int:
 func get_color_note_pairs() -> Dictionary:
 	return color_note_pairs
 
-func randomize_pairs():
+func randomize_pairs() -> void:
 	color_note_pairs.clear()
 	
 	var shuffled_notes = available_notes.duplicate()
@@ -91,7 +93,7 @@ func randomize_pairs():
 			"sound": _note_sound_map[note]
 		}
 
-func get_melody():
+func get_melody() -> Array:
 	var melody: Array
 	var previous_note: String = ""
 	for i in range(discovered_notes.size()):
