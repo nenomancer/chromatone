@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://uu254rm3t7ih"]
+[gd_scene load_steps=3 format=3 uid="uid://uu254rm3t7ih"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_hojuv"]
+
+[sub_resource type="FontVariation" id="FontVariation_7wuwn"]
+variation_embolden = 1.2
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -11,17 +14,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hojuv")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 246.0
-offset_top = 347.0
-offset_right = 831.0
-offset_bottom = 828.0
-text = "Load level 1"
-
 [node name="GameUI" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 206.0
+offset_right = 992.0
+offset_bottom = 443.0
+theme_override_fonts/font = SubResource("FontVariation_7wuwn")
+theme_override_font_sizes/font_size = 100
+text = "CHROMATONE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 420.0
+offset_right = 779.0
+offset_bottom = 880.0
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Start Game"
+
+[node name="AboutButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Tutorial"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

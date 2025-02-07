@@ -1,11 +1,12 @@
 extends Control
 
+signal player_guess(is_correct)
 @export var level_number: int
 
 var _max_round: int = 5
 var _max_level: int = 5
-var _current_round: int = GameManager.get_round()
-var _current_level: int = GameManager.get_level()
+var _current_round: int = GameManager.current_round
+var _current_level: int = GameManager.current_level
 var _correct_melody: Array
 var _player_melody: Array
 var guess_index: int
@@ -23,12 +24,18 @@ func on_level_guess(note) -> void:
 	GameManager.play_note(note)
 	_player_melody.append(note)
 	
-	if note == _correct_melody[guess_index]:
+	if note == _correct_melody[guess_index]: # Correct
+		# signal correct
+		#emit_signal("player_guess", true)
+		GameManager.player_guess.emit(true)
 		temp_score += 10
 	else:
-		temp_score -= 5
+		# signal incorrect
+		#emit_signal("player_guess", false) # Something needs to recieve this, ideally the GameManager
+		GameManager.player_guess.emit(false)
+		temp_score -= 5 # This could be handled over there as well
+
 	guess_index += 1
-	
 	if (guess_index < _correct_melody.size()):
 		return
 
@@ -58,9 +65,9 @@ func load_buttons() -> void:
 	buttons_ui.disable_buttons()
 
 func start_round() -> void:
-	$ScoreLabel.text = "Current score: " + var_to_str(GameManager.current_score)
-	$LevelLabel.text = "Level: " + var_to_str(GameManager.current_level)
-	$RoundLabel.text = "Round: " + var_to_str(GameManager.current_round)
+	#$ScoreLabel.text = "Current score: " + var_to_str(GameManager.current_score)
+	#$LevelLabel.text = "Level: " + var_to_str(GameManager.current_level)
+	#$RoundLabel.text = "Round: " + var_to_str(GameManager.current_round)
 	
 	if (GameManager.current_round == 3):
 		var random_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
@@ -80,5 +87,5 @@ func end_round() -> void:
 	buttons_ui.disable_buttons()
 	buttons_ui.clear_color_from_buttons()
 	GameManager.set_score(temp_score)
-	$ScoreLabel.text = "Current score: " + var_to_str(GameManager.get_score())
+	#$ScoreLabel.text = "Current score: " + var_to_str(GameManager.current_score)
 	await get_tree().create_timer(2).timeout

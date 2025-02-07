@@ -1,5 +1,12 @@
 extends Node
 
+signal player_guess(is_correct: bool)
+signal show_about
+signal exit_game
+signal change_level(level_number)
+signal change_round(level_round)
+
+
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
@@ -22,31 +29,32 @@ var _note_sound_map: Dictionary = {
 
 var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
+
 const LEVELS_UI: String = "res://levels_ui/levels_ui.tscn"
 const WARMUP_UI: String = "res://warmup_ui/warmup_ui.tscn"
 const MAIN: String = "res://main/main.tscn"
+const LABELS_UI: String = "res://labels_ui/labels_ui.tscn"
 
 func _ready() -> void:
 	generate_audio_player()
 	randomize_pairs()
+	player_guess.connect(_on_player_guess)
+	
 
 func generate_audio_player() -> void:
 	await get_tree().process_frame
 	get_tree().root.add_child(_note_audio_player)
 	
+func generate_labels() -> void:
+	await get_tree().process_frame
+	var labels = load(LABELS_UI).instantiate()
+	get_tree().root.add_child(labels)
 func play_note(note) -> void:
 	if _note_audio_player:
 		_note_audio_player.stream = _note_sound_map[note]
 		_note_audio_player.volume_db = -7.0
 		#_note_audio_player.pitch_scale = 7
 		_note_audio_player.play()
-
-
-func get_random_note2(_all_notes: bool = false) -> String:
-	if (_all_notes):
-		return available_notes.pick_random()
-	
-	return discovered_notes.pick_random()
 
 func get_random_note(_note_array) -> String:
 	return _note_array.pick_random()
@@ -63,17 +71,8 @@ func get_undiscovered_notes() -> Array:
 func set_round(new_round: int):
 	current_round = new_round
 
-func get_round() -> int:
-	return current_round
-	
 func set_level(new_level: int):
 	current_level = new_level
-	
-func get_level() -> int:
-	return current_level
-
-func get_color_note_pairs() -> Dictionary:
-	return color_note_pairs
 
 func randomize_pairs() -> void:
 	color_note_pairs.clear()
@@ -104,8 +103,17 @@ func get_melody() -> Array:
 		melody.append(note)
 	return melody
 
-func get_score() -> int:
-	return current_score
-	
 func set_score(new_score: int):
 	current_score = new_score
+
+func _on_player_guess(_is_correct: bool):
+	print("Player guess!: ")
+	print(_is_correct)
+
+func _on_change_round(_round_number: int):
+	#current_round = _round_number
+	current_round += 1
+
+func _on_change_level(_level_number: int):
+	current_level += 1
+	get_tree().change_scene_to_file(LEVELS_UI)
