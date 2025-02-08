@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://de660p8djxw7c"]
 
-[ext_resource type="Script" path="res://guess_counter/guess_counter.gd" id="1_mp4na"]
+[ext_resource type="Script" path="res://scripts/guess_counter.gd" id="1_00wn8"]
 
 [node name="GuessCounter" type="HBoxContainer"]
 anchors_preset = 15
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 1
-script = ExtResource("1_mp4na")
+script = ExtResource("1_00wn8")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2

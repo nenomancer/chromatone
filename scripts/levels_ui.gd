@@ -59,7 +59,7 @@ func play_melody() -> void:
 		await get_tree().create_timer(_melody_stepsize).timeout
 	
 func load_buttons() -> void:
-	buttons_ui = load("res://buttons_ui/buttons_ui.tscn").instantiate()
+	buttons_ui = load(GameManager.BUTTONS_UI).instantiate()
 	$UI.add_child(buttons_ui)
 	buttons_ui.note_selected.connect(on_level_guess)
 	buttons_ui.disable_buttons()

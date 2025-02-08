@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://uu254rm3t7ih"]
 
-[ext_resource type="Script" path="res://main/main.gd" id="1_hojuv"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ra6y2"]
 
 [sub_resource type="FontVariation" id="FontVariation_7wuwn"]
 variation_embolden = 1.2
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hojuv")
+script = ExtResource("1_ra6y2")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1

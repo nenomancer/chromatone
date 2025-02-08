@@ -34,10 +34,10 @@ var buttons_ui: Control
 var buttons_array: Array
 
 const MAIN: String = "res://main/main.tscn"
-const LEVELS_UI: String = "res://levels_ui/levels_ui.tscn"
-const WARMUP_UI: String = "res://warmup_ui/warmup_ui.tscn"
-const LABELS_UI: String = "res://labels_ui/labels_ui.tscn"
-const BUTTONS_UI: String = "res://buttons_ui/buttons_ui.tscn"
+const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
+const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
+const LABELS_UI: String = "res://scenes/labels_ui.tscn"
+const BUTTONS_UI: String = "res://scenes/buttons_ui.tscn"
 
 func _ready() -> void:
 	await get_tree().process_frame
