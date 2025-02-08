@@ -11,6 +11,8 @@ var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
 var discovered_notes: Array = []
+var correct_note: String
+
 var current_round: int = 1
 var current_level: int = 1
 var current_score: int = 0
@@ -28,25 +30,30 @@ var _note_sound_map: Dictionary = {
 }
 
 var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+var buttons_ui: Control
+var buttons_array: Array
 
-
+const MAIN: String = "res://main/main.tscn"
 const LEVELS_UI: String = "res://levels_ui/levels_ui.tscn"
 const WARMUP_UI: String = "res://warmup_ui/warmup_ui.tscn"
-const MAIN: String = "res://main/main.tscn"
 const LABELS_UI: String = "res://labels_ui/labels_ui.tscn"
+const BUTTONS_UI: String = "res://buttons_ui/buttons_ui.tscn"
 
 func _ready() -> void:
+	await get_tree().process_frame
 	generate_audio_player()
 	randomize_pairs()
-	player_guess.connect(_on_player_guess)
+	#player_guess.connect(_on_player_guess)
+	change_round.connect(_on_change_round)
+	change_level.connect(_on_change_level)
 	
 
 func generate_audio_player() -> void:
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	get_tree().root.add_child(_note_audio_player)
 	
 func generate_labels() -> void:
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	var labels = load(LABELS_UI).instantiate()
 	get_tree().root.add_child(labels)
 func play_note(note) -> void:
@@ -106,9 +113,9 @@ func get_melody() -> Array:
 func set_score(new_score: int):
 	current_score = new_score
 
-func _on_player_guess(_is_correct: bool):
-	print("Player guess!: ")
-	print(_is_correct)
+#func _on_player_guess(_is_correct: bool): # Unnecessary for now
+	#print("Player guess!: ")
+	#print(_is_correct)
 
 func _on_change_round(_round_number: int):
 	#current_round = _round_number
@@ -117,3 +124,64 @@ func _on_change_round(_round_number: int):
 func _on_change_level(_level_number: int):
 	current_level += 1
 	get_tree().change_scene_to_file(LEVELS_UI)
+
+func load_buttons() -> void:
+	buttons_ui = load(BUTTONS_UI).instantiate()
+	get_tree().root.add_child(buttons_ui)
+	buttons_array = buttons_ui.get_children()
+	buttons_ui.disable_buttons()
+
+func start_warmup():
+	#load_buttons()
+	
+	buttons_ui.assign_color_to_buttons(func(note): return note in available_notes)
+	correct_note = get_random_note(get_undiscovered_notes())
+	play_note(correct_note)
+	buttons_ui.enable_discovered_buttons()
+
+func end_warmup():
+	pass
+
+	
+func start_warmup_round():
+	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.available_notes)
+	correct_note = get_random_note(get_undiscovered_notes())
+	await get_tree().create_timer(1).timeout
+	play_note(correct_note)
+	await get_tree().create_timer(1).timeout
+	buttons_ui.enable_discovered_buttons()
+
+func end_warmup_round() -> void:
+	await get_tree().create_timer(2).timeout
+	if (discovered_notes.size() == 3):
+		#return start_level_1()
+		pass
+	
+	if (current_round < 5):
+		set_round(current_round + 1)
+		print('now its round ')
+		print(current_round)
+		start_warmup_round()
+	else:
+		pass
+		#start_level_1()
+
+func on_warmup_guess(note):
+	play_note(note)
+	var selected_button: Button = buttons_array.filter(func(button): return button.get_meta('note') == note).front()
+	
+	print(selected_button)
+	var correct_button: Button = buttons_array.filter(func(button): return button.get_meta('note') == correct_note).front()
+	
+	if (correct_note == note || current_round - discovered_notes.size() >= 3):
+		add_discovered_note(note)
+		selected_button.modulate = Color.WHITE
+		#print("correct! the button was")
+		
+	else:
+		selected_button.modulate = Color.BLACK
+		correct_button.modulate = Color.WHITE
+		
+	await get_tree().create_timer(2).timeout
+	buttons_ui.disable_buttons()
+	end_warmup_round()

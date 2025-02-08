@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://de660p8djxw7c"]
 
-[ext_resource type="Script" path="res://guess_counter.gd" id="1_mp4na"]
+[ext_resource type="Script" path="res://guess_counter/guess_counter.gd" id="1_mp4na"]
 
 [node name="GuessCounter" type="HBoxContainer"]
 anchors_preset = 15

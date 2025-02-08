@@ -1,11 +1,13 @@
 extends Control
 
 signal note_selected(color)
+signal correct_button(button: Button)
+signal incorrect_button(button: Button)
 
 var number_of_colors: int = 3
 
 var color_note_pairs = GameManager.color_note_pairs
-@onready var buttons = $GridContainer.get_children()
+@onready var buttons = get_children()
 
 func _ready():
 	for button: Button in buttons:
@@ -31,7 +33,7 @@ func assign_color_to_buttons(condition: Callable):
 		var button = buttons[i]
 		var note = note_list[i]
 		var color = color_note_pairs[note]["color"]
-		button.text = note # For debugging
+		#button.text = note # For debugging
 		if condition.call(note): 
 			button.modulate = color
 			button.set_meta("note", note)
@@ -42,7 +44,7 @@ func clear_color_from_buttons():
 	for button in buttons:
 		button.modulate = Color.WHITE
 
-func enable_some_buttons():
+func enable_discovered_buttons():
 	var note_list = color_note_pairs.keys() # Get notes 
 	
 	for button in buttons:
