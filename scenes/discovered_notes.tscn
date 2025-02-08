@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cpbdsso036yty"]
+
+[node name="DiscoveredNotes" type="GridContainer"]
+offset_left = 320.0
+offset_top = 294.0
+offset_right = 768.0
+offset_bottom = 354.0
+columns = 7

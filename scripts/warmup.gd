@@ -20,15 +20,6 @@ func start_level_1() -> void:
 	GameManager.set_round(1)
 	get_tree().change_scene_to_file(GameManager.LEVELS_UI)
 
-func start_round() -> void:
-	GameManager.buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.available_notes)
-	# export this gto game manager
-	_correct_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
-	#await get_tree().create_timer(1).timeout # See what's the problem here
-	GameManager.play_note(_correct_note)
-	#await get_tree().create_timer(1).timeout
-	#GameManager.buttons_ui.enable_some_buttons()
-
 func end_round() -> void:
 	await get_tree().create_timer(2).timeout
 	if (GameManager.discovered_notes.size() == 3):
@@ -36,7 +27,7 @@ func end_round() -> void:
 	
 	if (GameManager.current_round < 5):
 		GameManager.set_round(GameManager.current_round + 1)
-		start_round()
+		#start_round()
 	else:
 		start_level_1()
 	

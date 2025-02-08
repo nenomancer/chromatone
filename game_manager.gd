@@ -6,7 +6,6 @@ signal exit_game
 signal change_level(level_number)
 signal change_round(level_round)
 
-
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
@@ -33,11 +32,15 @@ var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 var buttons_ui: Control
 var buttons_array: Array
 
+var discovered_notes_display: GridContainer
+
 const MAIN: String = "res://main/main.tscn"
-const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
-const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
-const LABELS_UI: String = "res://scenes/labels_ui.tscn"
-const BUTTONS_UI: String = "res://scenes/buttons_ui.tscn"
+const LEVELS_UI: String = "res://scenes/levels.tscn"
+const WARMUP_UI: String = "res://scenes/warmup.tscn"
+const LABELS_UI: String = "res://scenes/labels.tscn"
+const BUTTONS_UI: String = "res://scenes/buttons.tscn"
+const DISCOVERED_NOTE: String = "res://scenes/discovered_note.tscn"
+const DISCOVERED_NOTES: String = "res://scenes/discovered_notes.tscn"
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -67,7 +70,11 @@ func get_random_note(_note_array) -> String:
 	return _note_array.pick_random()
 
 func add_discovered_note(note: String):
+	var color = color_note_pairs[note]['color']
 	discovered_notes.append(note)
+	var discovered_note = load(DISCOVERED_NOTE).instantiate()
+	discovered_note.color = color
+	discovered_notes_display.add_child(discovered_note)
 	
 func get_discovered_notes() -> Array:
 	return discovered_notes
@@ -133,7 +140,8 @@ func load_buttons() -> void:
 
 func start_warmup():
 	#load_buttons()
-	
+	discovered_notes_display = load(DISCOVERED_NOTES).instantiate()
+	get_tree().root.add_child(discovered_notes_display)
 	buttons_ui.assign_color_to_buttons(func(note): return note in available_notes)
 	correct_note = get_random_note(get_undiscovered_notes())
 	play_note(correct_note)
@@ -159,13 +167,15 @@ func end_warmup_round() -> void:
 	
 	if (current_round < 5):
 		set_round(current_round + 1)
-		print('now its round ')
-		print(current_round)
 		start_warmup_round()
 	else:
-		pass
-		#start_level_1()
+		load_level()
 
+func load_level():
+	set_level(1)
+	set_round(1)
+	get_tree().change_scene_to_file(LEVELS_UI)
+	
 func on_warmup_guess(note):
 	play_note(note)
 	var selected_button: Button = buttons_array.filter(func(button): return button.get_meta('note') == note).front()

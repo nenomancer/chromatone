@@ -3,7 +3,7 @@ extends HBoxContainer
 
 @export var total_guesses: int = 3
 var guess_number: int = 0
-const GUESS_COUNT = preload("res://guess_counter/guess_count.tscn")
+const GUESS_COUNT = preload("res://scenes/guess_count.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(total_guesses):
