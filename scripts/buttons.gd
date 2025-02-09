@@ -51,6 +51,6 @@ func enable_discovered_buttons():
 		var note = button.get_meta("note")
 		if note not in GameManager.discovered_notes:
 			button.disabled = false
-		else:
-			button.disabled = true
+		#else:
+			#button.disabled = true
 			

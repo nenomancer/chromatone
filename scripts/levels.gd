@@ -5,8 +5,6 @@ signal player_guess(is_correct)
 
 var _max_round: int = 5
 var _max_level: int = 5
-var _current_round: int = GameManager.current_round
-var _current_level: int = GameManager.current_level
 var _correct_melody: Array
 var _player_melody: Array
 var guess_index: int
@@ -16,53 +14,40 @@ var temp_score: int = 0
 var _melody_stepsize: int = 1
 
 func _ready():
-	load_buttons()
+	#load_buttons()
+	GameManager.load_buttons()
+	GameManager.buttons.note_selected.connect(on_level_guess)
+
 	start_round()
 	
 	
 func on_level_guess(note) -> void:
 	GameManager.play_note(note)
 	_player_melody.append(note)
+	var correct_note = _correct_melody[guess_index]
 	
-	if note == _correct_melody[guess_index]: # Correct
-		# signal correct
-		#emit_signal("player_guess", true)
-		GameManager.player_guess.emit(true)
-		temp_score += 10
+	if note == correct_note: # Correct
+		GameManager.update_score(10)
 	else:
-		# signal incorrect
-		#emit_signal("player_guess", false) # Something needs to recieve this, ideally the GameManager
-		GameManager.player_guess.emit(false)
-		temp_score -= 5 # This could be handled over there as well
-
+		GameManager.update_score(-5)
+	
 	guess_index += 1
-	if (guess_index < _correct_melody.size()):
-		return
+	
+	if (guess_index >= _correct_melody.size()):
+		end_round()
+		process_next_round()
 
-	end_round()
-	
-	if (GameManager.current_round < 5):
-		GameManager.set_round(GameManager.current_round + 1)
-		start_round()
-	else: 
-		GameManager.set_round(1)
-		GameManager.set_level(GameManager.current_level + 1)
-		# This should eventually be changed to open the Dialogue Scene
-		get_tree().change_scene_to_file(GameManager.LEVELS)
-	
 func get_melody() -> void:
 	_correct_melody = GameManager.get_melody()
 
 func play_melody() -> void:
-	for index in range(_correct_melody.size()):
-		GameManager.play_note(_correct_melody[index])
+	for note in _correct_melody:
+		GameManager.play_note(note)
 		await get_tree().create_timer(_melody_stepsize).timeout
-	
-func load_buttons() -> void:
-	buttons = load(GameManager.BUTTONS).instantiate()
-	add_child(buttons)
-	buttons.note_selected.connect(on_level_guess)
-	buttons.disable_buttons()
+
+	#for index in range(_correct_melody.size()):
+		#GameManager.play_note(_correct_melody[index])
+		#await get_tree().create_timer(_melody_stepsize).timeout
 
 func start_round() -> void:
 	if (GameManager.current_round == 3):
@@ -76,12 +61,21 @@ func start_round() -> void:
 	play_melody()
 
 	await get_tree().create_timer(2).timeout
-	buttons.enable_buttons()
-	buttons.assign_color_to_buttons(func(note): return note in GameManager.get_discovered_notes())
+	GameManager.enable_buttons()
+	GameManager.buttons.assign_color_to_buttons(func(note): return note in GameManager.get_discovered_notes())
+
+func process_next_round() -> void:
+	if (GameManager.current_round < 5):
+		GameManager.set_round(GameManager.current_round + 1)
+		start_round()
+	else: 
+		GameManager.set_round(1)
+		GameManager.set_level(GameManager.current_level + 1)
+		# This should eventually be changed to open the Dialogue Scene
+		GameManager.change_scene(GameManager.LEVELS)
 
 func end_round() -> void:
-	buttons.disable_buttons()
-	buttons.clear_color_from_buttons()
-	GameManager.set_score(temp_score)
-	#$ScoreLabel.text = "Current score: " + var_to_str(GameManager.current_score)
+	GameManager.enable_buttons(false)
+	GameManager.buttons.clear_color_from_buttons()
+	#GameManager.set_score(temp_score)
 	await get_tree().create_timer(2).timeout
