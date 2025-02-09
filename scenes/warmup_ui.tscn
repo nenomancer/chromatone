@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dqwwfxcwsgt7m"]
 
-[ext_resource type="Script" path="res://warmup_ui/warmup_ui.gd" id="1_1sa52"]
+[ext_resource type="Script" path="res://scripts/warmup_ui.gd" id="1_1sa52"]
 
 [node name="WarmupUI" type="Control"]
 layout_mode = 3

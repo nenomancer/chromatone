@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://uu254rm3t7ih"]
 
-[ext_resource type="Script" path="res://main/main.gd" id="1_hojuv"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ra6y2"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hojuv")
+script = ExtResource("1_ra6y2")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0

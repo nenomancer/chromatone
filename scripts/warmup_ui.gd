@@ -6,7 +6,7 @@ var _correct_guesses: int = 0
 var _score: int = 0
 
 func _ready():
-	buttons_ui = load("res://buttons_ui/buttons_ui.tscn").instantiate()
+	buttons_ui = load("res://scenes/buttons_ui.tscn").instantiate()
 	$UI.add_child(buttons_ui)
 	
 	buttons_ui.note_selected.connect(on_warmup_guess)

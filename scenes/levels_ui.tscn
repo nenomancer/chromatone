@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtxefobngochu"]
 
-[ext_resource type="Script" path="res://levels_ui/levels_ui.gd" id="1_2b6qb"]
+[ext_resource type="Script" path="res://scripts/levels_ui.gd" id="1_6ps05"]
 
 [node name="LevelsUI" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2b6qb")
+script = ExtResource("1_6ps05")
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 0

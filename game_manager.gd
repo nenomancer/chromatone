@@ -22,9 +22,9 @@ var _note_sound_map: Dictionary = {
 
 var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
-const LEVELS_UI: String = "res://levels_ui/levels_ui.tscn"
-const WARMUP_UI: String = "res://warmup_ui/warmup_ui.tscn"
-const MAIN: String = "res://main/main.tscn"
+const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
+const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
+const MAIN: String = "res://scenes/main.tscn"
 
 func _ready() -> void:
 	generate_audio_player()
