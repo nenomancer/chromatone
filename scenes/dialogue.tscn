@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg1a3efqkm8ni"]
+
+[ext_resource type="Script" path="res://scripts/dialogue.gd" id="1_fjkha"]
+
+[node name="Dialogue" type="Control" node_paths=PackedStringArray("discovered_notes_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjkha")
+discovered_notes_display = NodePath("DiscoveredNotesDisplay")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -371.0
+offset_top = 615.0
+offset_right = 359.0
+offset_bottom = 723.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Congratulations! 
+You passed the warmup rounds and discovered 3 notes!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -328.0
+offset_top = 749.0
+offset_right = 316.0
+offset_bottom = 857.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "You can try them out by clicking, or continue to the next level."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DiscoveredNotesDisplay" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -67.0
+offset_right = 204.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartLevel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = 204.0
+offset_right = 270.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Start Level 1"
+
+[connection signal="pressed" from="StartLevel" to="." method="_on_start_level_pressed"]

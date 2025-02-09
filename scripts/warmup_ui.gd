@@ -37,7 +37,7 @@ func on_warmup_guess(note) -> void:
 func start_level_1() -> void:
 	#GameManager.set_level(1)
 	#GameManager.set_round(1)
-	get_tree().change_scene_to_file(GameManager.LEVELS_UI)
+	get_tree().change_scene_to_file(GameManager.DIALOGUE)
 
 func start_round() -> void:
 	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.available_notes)

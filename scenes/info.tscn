@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5b7ybfy6arfj"]
 
-[ext_resource type="Script" path="res://info.gd" id="1_bytdj"]
+[ext_resource type="Script" path="res://scripts/info.gd" id="1_bytdj"]
 
 [node name="Info" type="Control" node_paths=PackedStringArray("discovered_notes_display", "level_display", "round_display")]
 layout_mode = 3

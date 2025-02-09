@@ -28,7 +28,7 @@ var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
 const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
 const MAIN: String = "res://scenes/main.tscn"
-
+const DIALOGUE: String = "res://scenes/dialogue.tscn"
 const BUTTONS_UI = preload("res://scenes/buttons_ui.tscn")
 const INFO = preload("res://scenes/info.tscn")
 
