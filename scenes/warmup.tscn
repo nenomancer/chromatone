@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/warmup.gd" id="1_cenxm"]
 [ext_resource type="PackedScene" uid="uid://cpbdsso036yty" path="res://scenes/discovered_notes.tscn" id="2_mxh1p"]
 
-[node name="WarmupUI" type="Control"]
+[node name="Warmup" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
