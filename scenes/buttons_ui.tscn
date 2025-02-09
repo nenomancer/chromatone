@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dalofv5jucuck"]
+[gd_scene load_steps=3 format=3 uid="uid://dalofv5jucuck"]
 
 [ext_resource type="Script" path="res://scripts/buttons_ui.gd" id="1_nhimn"]
+[ext_resource type="PackedScene" uid="uid://cb5ok8yc1mxwr" path="res://scenes/color_button.tscn" id="2_o43os"]
 
 [node name="ButtonsUI" type="Control"]
 layout_mode = 3
@@ -28,30 +29,23 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 7
 
-[node name="Button" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton2" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton3" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton4" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton5" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button6" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton6" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2
 
-[node name="Button7" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="ColorButton7" parent="GridContainer" instance=ExtResource("2_o43os")]
 layout_mode = 2

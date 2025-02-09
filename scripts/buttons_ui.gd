@@ -52,3 +52,12 @@ func enable_some_buttons():
 		else:
 			button.disabled = true
 			
+func enable_discovered_buttons():
+	var note_list = color_note_pairs.keys() # Get notes 
+	
+	for button in buttons:
+		var note = button.get_meta("note")
+		if note in GameManager.discovered_notes:
+			button.disabled = false
+		else:
+			button.disabled = true

@@ -35,8 +35,6 @@ func on_warmup_guess(note) -> void:
 	end_round()
 
 func start_level_1() -> void:
-	#GameManager.set_level(1)
-	#GameManager.set_round(1)
 	get_tree().change_scene_to_file(GameManager.DIALOGUE)
 
 func start_round() -> void:

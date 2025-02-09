@@ -68,9 +68,9 @@ func load_info() -> void:
 
 func start_round() -> void:
 	if (GameManager.current_round == 3):
-		emit_signal("note_discovered")
 		var random_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
 		GameManager.add_discovered_note(random_note)
+		emit_signal("note_discovered")
 
 	guess_index = 0
 
