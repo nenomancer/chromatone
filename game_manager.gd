@@ -1,5 +1,8 @@
 extends Node
 
+signal round_changed
+signal level_changed
+
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
@@ -26,6 +29,9 @@ const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
 const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
 const MAIN: String = "res://scenes/main.tscn"
 
+const BUTTONS_UI = preload("res://scenes/buttons_ui.tscn")
+const INFO = preload("res://scenes/info.tscn")
+
 func _ready() -> void:
 	generate_audio_player()
 	randomize_pairs()
@@ -41,13 +47,6 @@ func play_note(note) -> void:
 		#_note_audio_player.pitch_scale = 7
 		_note_audio_player.play()
 
-
-func get_random_note2(_all_notes: bool = false) -> String:
-	if (_all_notes):
-		return available_notes.pick_random()
-	
-	return discovered_notes.pick_random()
-
 func get_random_note(_note_array) -> String:
 	return _note_array.pick_random()
 
@@ -62,16 +61,14 @@ func get_undiscovered_notes() -> Array:
 
 func set_round(new_round: int):
 	current_round = new_round
+	emit_signal("round_changed")
 
-func get_round() -> int:
-	return current_round
-	
 func set_level(new_level: int):
 	current_level = new_level
+	emit_signal("level_changed")
+	print("current level is (burt from the other shiet): ")
+	print(GameManager.current_level)
 	
-func get_level() -> int:
-	return current_level
-
 func get_color_note_pairs() -> Dictionary:
 	return color_note_pairs
 
@@ -104,8 +101,5 @@ func get_melody() -> Array:
 		melody.append(note)
 	return melody
 
-func get_score() -> int:
-	return current_score
-	
 func set_score(new_score: int):
 	current_score = new_score

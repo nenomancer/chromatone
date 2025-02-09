@@ -10,35 +10,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6ps05")
-
-[node name="ScoreLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 454.0
-offset_top = 306.0
-offset_right = 578.0
-offset_bottom = 329.0
-text = "This is the score"
-
-[node name="LevelLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 235.0
-offset_right = 670.0
-offset_bottom = 258.0
-text = "This is information, currently in progreesssss"
-
-[node name="RoundLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 267.0
-offset_right = 670.0
-offset_bottom = 290.0
-text = "This is information, currently in progreesssss"
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

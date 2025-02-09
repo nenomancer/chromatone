@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5b7ybfy6arfj"]
+
+[ext_resource type="Script" path="res://info.gd" id="1_bytdj"]
+
+[node name="Info" type="Control" node_paths=PackedStringArray("discovered_notes_display", "level_display", "round_display")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_bytdj")
+discovered_notes_display = NodePath("MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay")
+level_display = NodePath("MarginContainer2/MarginContainer/Level/Value")
+round_display = NodePath("MarginContainer2/MarginContainer/Round/Value")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 241.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+
+[node name="MarginContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Level" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "LEVEL:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_constants/margin_right = 32
+
+[node name="Value" type="Label" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "3"
+horizontal_alignment = 2
+
+[node name="Round" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "ROUND:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_constants/margin_right = 32
+
+[node name="Value" type="Label" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "3"
+horizontal_alignment = 2
+
+[node name="Discovered" type="VBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "DISCOVERED:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
+theme_override_constants/margin_right = 32
+
+[node name="DiscoveredNotesDisplay" type="HBoxContainer" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
