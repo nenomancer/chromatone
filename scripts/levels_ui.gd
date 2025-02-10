@@ -12,14 +12,14 @@ var guess_index: int
 
 var buttons_ui: Control
 var info_ui: Control
-var temp_score: int = 0
+#var temp_score: int = 0
 var _melody_stepsize: int = 1
 
 func _ready():
 	load_info()
 	load_buttons()
-	GameManager.set_round(1)
 	GameManager.set_level(GameManager.current_level + 1)
+	GameManager.set_round(1)
 	start_round()
 	
 func on_level_guess(note) -> void:
@@ -27,9 +27,9 @@ func on_level_guess(note) -> void:
 	_player_melody.append(note)
 	
 	if note == _correct_melody[guess_index]:
-		temp_score += 10
+		GameManager.update_score(10)
 	else:
-		temp_score -= 5
+		GameManager.update_score(-5)
 	guess_index += 1
 	
 	if (guess_index < _correct_melody.size()):
@@ -42,9 +42,7 @@ func on_level_guess(note) -> void:
 		start_round()
 	else: 
 		GameManager.set_round(1)
-		GameManager.set_level(GameManager.current_level + 1)
-		# This should eventually be changed to open the Dialogue Scene
-		get_tree().change_scene_to_file(GameManager.LEVELS_UI)
+		get_tree().change_scene_to_file(GameManager.DIALOGUE)
 	
 func get_melody() -> void:
 	_correct_melody = GameManager.get_melody()
@@ -85,5 +83,4 @@ func start_round() -> void:
 func end_round() -> void:
 	buttons_ui.disable_buttons()
 	buttons_ui.clear_color_from_buttons()
-	GameManager.set_score(temp_score)
 	await get_tree().create_timer(2).timeout

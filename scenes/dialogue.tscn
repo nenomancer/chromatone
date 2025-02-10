@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/dialogue.gd" id="1_fjkha"]
 
-[node name="Dialogue" type="Control" node_paths=PackedStringArray("discovered_notes_display")]
+[node name="Dialogue" type="Control" node_paths=PackedStringArray("discovered_notes_display", "next_level_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,8 +11,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fjkha")
 discovered_notes_display = NodePath("DiscoveredNotesDisplay")
+next_level_button = NodePath("StartLevel")
 
-[node name="Label" type="Label" parent="."]
+[node name="Info1" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -28,7 +29,7 @@ You passed the warmup rounds and discovered 3 notes!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Label2" type="Label" parent="."]
+[node name="Info2" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -72,5 +73,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "Start Level 1"
-
-[connection signal="pressed" from="StartLevel" to="." method="_on_start_level_pressed"]

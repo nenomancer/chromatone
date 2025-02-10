@@ -2,15 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/info.gd" id="1_bytdj"]
 
-[node name="Info" type="Control" node_paths=PackedStringArray("discovered_notes_display", "level_display", "round_display")]
+[node name="Info" type="Control" node_paths=PackedStringArray("discovered_notes_display", "level_display", "round_display", "score_display")]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 script = ExtResource("1_bytdj")
 discovered_notes_display = NodePath("MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay")
-level_display = NodePath("MarginContainer2/MarginContainer/Level/Value")
-round_display = NodePath("MarginContainer2/MarginContainer/Round/Value")
+level_display = NodePath("MarginContainer2/MarginContainer/Level/LevelDisplay")
+round_display = NodePath("MarginContainer2/MarginContainer/Round/RoundDisplay")
+score_display = NodePath("MarginContainer2/MarginContainer/Score/ScoreDisplay")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -30,16 +31,16 @@ layout_mode = 2
 [node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Level"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "LEVEL:"
+text = "Level:"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Level"]
 layout_mode = 2
-theme_override_constants/margin_right = 32
+theme_override_constants/margin_right = 8
 
-[node name="Value" type="Label" parent="MarginContainer2/MarginContainer/Level"]
+[node name="LevelDisplay" type="Label" parent="MarginContainer2/MarginContainer/Level"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "3"
+text = "0"
 horizontal_alignment = 2
 
 [node name="Round" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
@@ -48,16 +49,34 @@ layout_mode = 2
 [node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Round"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "ROUND:"
+text = "Round:"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Round"]
 layout_mode = 2
-theme_override_constants/margin_right = 32
+theme_override_constants/margin_right = 8
 
-[node name="Value" type="Label" parent="MarginContainer2/MarginContainer/Round"]
+[node name="RoundDisplay" type="Label" parent="MarginContainer2/MarginContainer/Round"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "3"
+text = "0"
+horizontal_alignment = 2
+
+[node name="Score" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Score:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_constants/margin_right = 8
+
+[node name="ScoreDisplay" type="Label" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
 horizontal_alignment = 2
 
 [node name="Discovered" type="VBoxContainer" parent="MarginContainer2/MarginContainer"]
@@ -66,7 +85,7 @@ layout_mode = 2
 [node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Discovered"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "DISCOVERED:"
+text = "Discovered:"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Discovered"]
 layout_mode = 2

@@ -3,24 +3,21 @@ extends Control
 @export var discovered_notes_display: HBoxContainer
 @export var level_display: Label
 @export var round_display: Label
+@export var score_display: Label
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.connect("round_changed", update_round)
 	GameManager.connect("level_changed", update_level)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	GameManager.connect("score_changed", update_score)
 
 func update_round() -> void:
 	round_display.text = var_to_str(GameManager.current_round)
 	
 func update_level() -> void:
-	print("updating lelvel?")
 	level_display.text = var_to_str(GameManager.current_level)
+
+func update_score() -> void:
+	score_display.text = var_to_str(GameManager.current_score)
 
 func update_discovered_notes():
 	for child in discovered_notes_display.get_children():

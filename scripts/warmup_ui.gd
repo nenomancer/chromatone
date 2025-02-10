@@ -34,7 +34,7 @@ func on_warmup_guess(note) -> void:
 	
 	end_round()
 
-func start_level_1() -> void:
+func end_warmup() -> void:
 	get_tree().change_scene_to_file(GameManager.DIALOGUE)
 
 func start_round() -> void:
@@ -50,11 +50,11 @@ func start_round() -> void:
 func end_round() -> void:
 	await get_tree().create_timer(2).timeout
 	if (GameManager.discovered_notes.size() == 3):
-		return start_level_1()
+		return end_warmup()
 	
 	if (GameManager.current_round < 5):
 		GameManager.set_round(GameManager.current_round + 1)
 		start_round()
 	else:
-		start_level_1()
+		end_warmup()
 	

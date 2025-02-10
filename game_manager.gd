@@ -2,6 +2,7 @@ extends Node
 
 signal round_changed
 signal level_changed
+signal score_changed
 
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
@@ -66,8 +67,6 @@ func set_round(new_round: int):
 func set_level(new_level: int):
 	current_level = new_level
 	emit_signal("level_changed")
-	print("current level is (burt from the other shiet): ")
-	print(GameManager.current_level)
 	
 func get_color_note_pairs() -> Dictionary:
 	return color_note_pairs
@@ -101,5 +100,6 @@ func get_melody() -> Array:
 		melody.append(note)
 	return melody
 
-func set_score(new_score: int):
-	current_score = new_score
+func update_score(amount: int):
+	current_score += amount
+	emit_signal("score_changed")

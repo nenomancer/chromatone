@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ra6y2"]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" node_paths=PackedStringArray("start_button", "about_button", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,13 +10,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ra6y2")
+start_button = NodePath("VBoxContainer/StartGame")
+about_button = NodePath("VBoxContainer/About")
+exit_button = NodePath("VBoxContainer/Exit")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 246.0
-offset_top = 347.0
-offset_right = 831.0
-offset_bottom = 828.0
-text = "Load level 1"
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 249.0
+offset_top = -413.0
+offset_right = -249.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+text = "Start
+"
+
+[node name="About" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+text = "About"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/About" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_start_game_pressed"]
