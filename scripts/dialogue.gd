@@ -33,9 +33,11 @@ func load_buttons() -> void:
 	var buttons_ui = GameManager.BUTTONS_UI.instantiate()
 	add_child(buttons_ui)
 	buttons_ui.note_selected.connect(on_dialogue_press)
+	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes)
+
 	#buttons_ui.disable_buttons()
-	buttons_ui.enable_buttons()
-	buttons_ui.enable_discovered_buttons()
+	#buttons_ui.enable_buttons()
+	#buttons_ui.enable_discovered_buttons()
 	
 func on_dialogue_press(note) -> void:
 	print("PRESSING NOTE: ")
