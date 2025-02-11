@@ -36,6 +36,7 @@ const MAIN: String = "res://scenes/main.tscn"
 const DIALOGUE: String = "res://scenes/dialogue.tscn"
 const BUTTONS = preload("res://scenes/buttons.tscn")
 const INFO = preload("res://scenes/info.tscn")
+const GUESS_COUNTER = preload("res://scenes/guess_counter.tscn")
 
 func _ready() -> void:
 	generate_audio_player()

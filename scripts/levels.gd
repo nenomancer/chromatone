@@ -1,5 +1,7 @@
 extends Control
 
+signal guess_selected(is_correct: bool)
+
 @export var _max_round: int = 5
 @export var _discovery_round: int = 4 # Think about this
 
@@ -9,11 +11,14 @@ var _guess_index: int
 
 var _buttons: Control
 var _info: Control
+var _guess_counter: HBoxContainer
+
 var _melody_stepsize: int = 1
 
 func _ready():
 	load_info()
 	load_buttons()
+	load_guess_counter()
 	GameManager.set_level(GameManager.current_level + 1)
 	GameManager.set_round(1)
 	start_round()
@@ -27,15 +32,20 @@ func load_buttons() -> void:
 func load_info() -> void:
 	_info = GameManager.INFO.instantiate()
 	add_child(_info)
-
+func load_guess_counter() -> void:
+	_guess_counter = GameManager.GUESS_COUNTER.instantiate()
+	add_child(_guess_counter)
+	
 func on_level_guess(note) -> void:
 	GameManager.play_note(note)
 	_player_melody.append(note)
 	
 	if note == _correct_melody[_guess_index]:
 		GameManager.update_score(10)
+		emit_signal("guess_selected", true)
 	else:
 		GameManager.update_score(-5)
+		emit_signal("guess_selected", false)
 	_guess_index += 1
 	
 	if (_guess_index < _correct_melody.size()):
@@ -74,6 +84,7 @@ func start_round() -> void:
 	_buttons.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes)
 
 func end_round() -> void:
+	await get_tree().create_timer(2).timeout
+	_guess_counter.clear_colors()
 	_buttons.disable_buttons()
 	_buttons.clear_color_from_buttons()
-	await get_tree().create_timer(2).timeout
