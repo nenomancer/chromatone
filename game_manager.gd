@@ -3,17 +3,21 @@ extends Node
 signal round_changed
 signal level_changed
 signal score_changed
+signal note_discovered
 
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
+# tuka, za sekoja available note, vidi dali e discovered i
+# ako e, oboi ja ko shto treba
+# hmmm ama sakam i da bide zachuvan redosledot na otkrivanje...
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
 
-var discovered_notes: Array = []
 var current_round: int = 1
 var current_level: int = 1
 var current_score: int = 0
-
-var color_note_pairs: Dictionary = {}
 var current_note: String
+
+var discovered_notes: Array = []
+var color_note_pairs: Dictionary = {}
 var _note_sound_map: Dictionary = {
 	"C": preload("res://sounds/grand_piano_c.wav"),
 	"D": preload("res://sounds/grand_piano_d.wav"),
@@ -26,11 +30,11 @@ var _note_sound_map: Dictionary = {
 
 var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
-const LEVELS_UI: String = "res://scenes/levels_ui.tscn"
-const WARMUP_UI: String = "res://scenes/warmup_ui.tscn"
+const LEVELS: String = "res://scenes/levels.tscn"
+const WARMUP: String = "res://scenes/warmup.tscn"
 const MAIN: String = "res://scenes/main.tscn"
 const DIALOGUE: String = "res://scenes/dialogue.tscn"
-const BUTTONS_UI = preload("res://scenes/buttons_ui.tscn")
+const BUTTONS = preload("res://scenes/buttons.tscn")
 const INFO = preload("res://scenes/info.tscn")
 
 func _ready() -> void:
@@ -44,7 +48,7 @@ func generate_audio_player() -> void:
 func play_note(note) -> void:
 	if _note_audio_player:
 		_note_audio_player.stream = _note_sound_map[note]
-		_note_audio_player.volume_db = -7.0
+		_note_audio_player.volume_db = -4.0
 		#_note_audio_player.pitch_scale = 7
 		_note_audio_player.play()
 
@@ -53,10 +57,8 @@ func get_random_note(_note_array) -> String:
 
 func add_discovered_note(note: String):
 	discovered_notes.append(note)
+	emit_signal("note_discovered")
 	
-func get_discovered_notes() -> Array:
-	return discovered_notes
-
 func get_undiscovered_notes() -> Array:
 	return available_notes.filter(func(element): return not discovered_notes.has(element))
 

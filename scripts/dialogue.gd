@@ -15,13 +15,13 @@ func _ready() -> void:
 	load_buttons()
 
 func _start_next_level() -> void:
-	get_tree().change_scene_to_file(GameManager.LEVELS_UI)
+	get_tree().change_scene_to_file(GameManager.LEVELS)
 
 func load_buttons() -> void:
-	var buttons_ui = GameManager.BUTTONS_UI.instantiate()
+	var buttons_ui = GameManager.BUTTONS.instantiate()
 	add_child(buttons_ui)
 	buttons_ui.note_selected.connect(on_dialogue_press)
-	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes)
+	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes, true)
 	
 func on_dialogue_press(note) -> void:
 	GameManager.play_note(note)

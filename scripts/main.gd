@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 
 func _start_game() -> void:
-	get_tree().change_scene_to_file(GameManager.WARMUP_UI)
+	get_tree().change_scene_to_file(GameManager.WARMUP)
 
 func _show_abobut() -> void:
 	print("Info about the game and whatnot")

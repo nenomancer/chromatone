@@ -6,9 +6,14 @@ extends Control
 @export var score_display: Label
 
 func _ready() -> void:
+	connect_signals()
+	update_discovered_notes()
+
+func connect_signals() -> void:
 	GameManager.connect("round_changed", update_round)
 	GameManager.connect("level_changed", update_level)
 	GameManager.connect("score_changed", update_score)
+	GameManager.connect("note_discovered", update_discovered_notes)
 
 func update_round() -> void:
 	round_display.text = var_to_str(GameManager.current_round)
