@@ -32,8 +32,11 @@ func on_warmup_guess(note) -> void:
 func end_warmup() -> void:
 	get_tree().change_scene_to_file(GameManager.DIALOGUE)
 
+func is_discovered(note):
+	return note in GameManager.available_notes
+	
 func start_round() -> void:
-	_buttons.assign_color_to_buttons(func(note): return note in GameManager.available_notes)
+	_buttons.assign_color_to_buttons(is_discovered)
 	GameManager.current_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
 	
 	await get_tree().create_timer(1).timeout # See what's the problem here
