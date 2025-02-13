@@ -3,13 +3,21 @@ extends HBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	generate_guess_counts()
+	get_parent().connect("guess_selected", _on_guess)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func generate_guess_counts():
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+		
 	for i in GameManager.discovered_notes:
 		var guess = ColorRect.new()
 		guess.color = Color.WEB_GRAY
 		guess.custom_minimum_size = Vector2(80, 80)
 		add_child(guess)
-	get_parent().connect("guess_selected", _on_guess)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+		
 func _on_guess(is_correct: bool) -> void:
 	var guess = get_children()[get_parent()._guess_index]
 	print('is correct: ')

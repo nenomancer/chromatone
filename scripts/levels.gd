@@ -76,6 +76,7 @@ func start_round() -> void:
 	_guess_index = 0
 
 	await get_tree().create_timer(2).timeout
+	_guess_counter.generate_guess_counts()
 	get_melody()
 	play_melody()
 
