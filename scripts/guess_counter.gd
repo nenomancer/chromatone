@@ -20,8 +20,6 @@ func generate_guess_counts():
 		
 func _on_guess(is_correct: bool) -> void:
 	var guess = get_children()[get_parent()._guess_index]
-	print('is correct: ')
-	print(is_correct)
 	if is_correct:
 		guess.color = Color.GREEN
 	else:

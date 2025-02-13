@@ -44,13 +44,15 @@ func _ready() -> void:
 
 func generate_audio_player() -> void:
 	await get_tree().process_frame
+	_note_audio_player.volume_db = -14.0 # Temporary
+	#_note_audio_player.pitch_scale = 7 # Add in future
+	
+	
 	get_tree().root.add_child(_note_audio_player)
 	
 func play_note(note) -> void:
 	if _note_audio_player:
 		_note_audio_player.stream = _note_sound_map[note]
-		_note_audio_player.volume_db = -4.0
-		#_note_audio_player.pitch_scale = 7
 		_note_audio_player.play()
 
 func get_random_note(_note_array) -> String:

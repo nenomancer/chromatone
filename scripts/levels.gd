@@ -50,13 +50,14 @@ func on_level_guess(note) -> void:
 	
 	if (_guess_index < _correct_melody.size()):
 		return
-
+		
 	end_round()
 	
 	if (GameManager.current_round < _max_round):
 		GameManager.set_round(GameManager.current_round + 1)
 		start_round()
 	else: 
+		await get_tree().create_timer(2).timeout
 		GameManager.set_round(1)
 		get_tree().change_scene_to_file(GameManager.DIALOGUE)
 	
@@ -81,11 +82,11 @@ func start_round() -> void:
 	play_melody()
 
 	await get_tree().create_timer(2).timeout
-	_buttons.enable_buttons()
 	_buttons.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes)
+	_buttons.enable_discovered_buttons()
 
 func end_round() -> void:
+	_buttons.disable_buttons()
 	await get_tree().create_timer(2).timeout
 	_guess_counter.clear_colors()
-	_buttons.disable_buttons()
 	_buttons.clear_color_from_buttons()

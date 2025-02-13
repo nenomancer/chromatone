@@ -37,12 +37,13 @@ func is_discovered(note):
 	
 func start_round() -> void:
 	_buttons.assign_color_to_buttons(is_discovered)
+	
 	GameManager.current_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
-	
-	await get_tree().create_timer(1).timeout # See what's the problem here
-	GameManager.play_note(GameManager.current_note)
-	
 	await get_tree().create_timer(1).timeout
+	
+	GameManager.play_note(GameManager.current_note)
+	await get_tree().create_timer(1).timeout
+	
 	_buttons.enable_undiscovered_buttons()
 
 func end_round() -> void:
