@@ -19,13 +19,16 @@ func enable_buttons():
 func on_button_pressed(_button):
 	emit_signal("note_selected", _button.get_meta("note"))
 
-func assign_color_to_buttons(condition: Callable, thing: bool = false):
+func assign_color_to_buttons(condition: Callable, shuffle: bool = true):
 	var note_list = GameManager.color_note_pairs.keys() # Get notes 
-	
 	_buttons.shuffle()
+		
 	for i in range(_buttons.size()):
 		var _button = _buttons[i]
 		var note = note_list[i]
+		if not shuffle:
+			note = GameManager.available_notes[i]
+			
 		var color = GameManager.color_note_pairs[note]["color"]
 		_button.text = note # For debugging
 		if condition.call(note): 
