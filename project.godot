@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.3", "Mobile")
 [autoload]
 
 GameManager="*res://game_manager.gd"
+BackgroundMusic="*res://scenes/background_music.tscn"
 
 [display]
 
