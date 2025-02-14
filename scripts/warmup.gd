@@ -21,30 +21,29 @@ func load_info() -> void:
 	add_child(_info)
 
 func on_warmup_guess(note) -> void:
-	GameManager.play_note(note)
+	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)
 	_buttons.disable_buttons()
 
 	if (GameManager.current_note == note || GameManager.current_round - GameManager.discovered_notes.size() >= 3):
 		GameManager.add_discovered_note(note)
+		GameManager.assign_warmup_notes()
 	
 	end_round()
 
 func end_warmup() -> void:
 	get_tree().change_scene_to_file(GameManager.DIALOGUE)
 
-func is_discovered(note):
-	return note in GameManager.available_notes
-	
 func start_round() -> void:
-	_buttons.assign_color_to_buttons(is_discovered)
+	_buttons.assign_color_to_buttons(func(note): return note in GameManager.warmup_notes)
 	
-	GameManager.current_note = GameManager.get_random_note(GameManager.get_undiscovered_notes())
+	var other_notes = GameManager.warmup_notes.filter(func(note): return note not in GameManager.discovered_notes)
+	GameManager.current_note = GameManager.get_random_note(other_notes)
 	await get_tree().create_timer(1).timeout
 	
-	GameManager.play_note(GameManager.current_note)
+	GameManager.play_note(GameManager.current_note, GameManager.SOUNDS.CALL)
 	await get_tree().create_timer(1).timeout
 	
-	_buttons.enable_undiscovered_buttons()
+	_buttons.enable_warmup_buttons()
 
 func end_round() -> void:
 	await get_tree().create_timer(2).timeout

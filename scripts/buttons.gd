@@ -16,6 +16,15 @@ func enable_buttons():
 	for _button: Button in _buttons:
 		_button.disabled = false
 		
+func enable_warmup_buttons():
+	for button in _buttons:
+		var note = button.get_meta('note')
+		
+		# Enable buttons if they're warmup notes and not yet discovered
+		if (GameManager.warmup_notes.has(note) and not GameManager.discovered_notes.has(note)):
+			print(note + " should be here")
+			button.disabled = false
+		
 func on_button_pressed(_button):
 	emit_signal("note_selected", _button.get_meta("note"))
 
@@ -33,7 +42,7 @@ func assign_color_to_buttons(condition: Callable, shuffle: bool = true):
 			note = GameManager.available_notes[i]
 			
 		var color = GameManager.color_note_pairs[note]["color"]
-		_button.text = note # For debugging
+		#_button.text = note # For debugging
 		_button.disabled = true
 		_button.set_meta("note", note)
 		
