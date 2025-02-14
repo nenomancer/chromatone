@@ -25,4 +25,4 @@ func load_buttons() -> void:
 	buttons_ui.enable_discovered_buttons()
 	
 func on_dialogue_press(note) -> void:
-	GameManager.play_note(note)
+	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)

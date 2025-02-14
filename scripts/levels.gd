@@ -37,7 +37,7 @@ func load_guess_counter() -> void:
 	add_child(_guess_counter)
 	
 func on_level_guess(note) -> void:
-	GameManager.play_note(note)
+	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)
 	_player_melody.append(note)
 	
 	if note == _correct_melody[_guess_index]:
@@ -66,7 +66,7 @@ func get_melody() -> void:
 
 func play_melody() -> void:
 	for index in range(_correct_melody.size()):
-		GameManager.play_note(_correct_melody[index])
+		GameManager.play_note(_correct_melody[index], GameManager.SOUNDS.CALL)
 		await get_tree().create_timer(_melody_stepsize).timeout
 
 func start_round() -> void:
