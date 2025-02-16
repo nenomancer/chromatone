@@ -11,7 +11,12 @@ func _ready() -> void:
 		placeholder = 'the warmup round'
 	else:
 		placeholder = 'level ' + var_to_str(GameManager.current_round)
-	$Info1.text = 'Congratulations! You just passed ' + placeholder + '!'
+	
+	var discovered_notes_size = var_to_str(GameManager.discovered_notes.size())
+	var score = var_to_str(GameManager.current_score)
+	$VBoxContainer/Info2.text = 'You passed ' + placeholder + \
+	', scored ' + score + \
+	' points and discovered ' + discovered_notes_size + ' notes!'
 	load_buttons()
 
 func _start_next_level() -> void:
@@ -24,5 +29,6 @@ func load_buttons() -> void:
 	buttons_ui.assign_color_to_buttons(func(note): return note in GameManager.discovered_notes, false)
 	buttons_ui.enable_discovered_buttons()
 	
-func on_dialogue_press(note) -> void:
+func on_dialogue_press(button: Button) -> void:
+	var note = button.get_meta("note")
 	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)

@@ -93,3 +93,38 @@ theme_override_constants/margin_right = 32
 
 [node name="DiscoveredNotesDisplay" type="HBoxContainer" parent="MarginContainer2/MarginContainer/Discovered"]
 layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)

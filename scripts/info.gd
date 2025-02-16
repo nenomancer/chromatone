@@ -5,15 +5,24 @@ extends Control
 @export var round_display: Label
 @export var score_display: Label
 
+@onready var _discovered_colors: Array = discovered_notes_display.get_children()
+
 func _ready() -> void:
+	set_color_notes_shiet()
 	connect_signals()
 	update_discovered_notes()
+	
 
+func set_color_notes_shiet():
+	var notes = GameManager.available_notes
+	for i in range(_discovered_colors.size()):
+		_discovered_colors[i].set_meta("note", notes[i])
+		#_discovered_colors[i].modulate = GameManager.color_note_pairs[notes[i]]["color"]
 func connect_signals() -> void:
 	GameManager.connect("round_changed", update_round)
 	GameManager.connect("level_changed", update_level)
 	GameManager.connect("score_changed", update_score)
-	GameManager.connect("note_discovered", update_discovered_notes)
+	GameManager.connect("note_discovered", add_discovered_note)
 
 func update_round() -> void:
 	round_display.text = var_to_str(GameManager.current_round)
@@ -25,16 +34,16 @@ func update_score() -> void:
 	score_display.text = var_to_str(GameManager.current_score)
 
 func update_discovered_notes():
-	for child in discovered_notes_display.get_children():
-		discovered_notes_display.remove_child(child)
-		child.queue_free()
+	for rect in _discovered_colors:
+		var note = rect.get_meta('note')
+		if note in GameManager.discovered_notes:
+			var color = GameManager.color_note_pairs[note]['color'] # Ova realno treba da e funkcija
+			rect.color = color
 		
-	for note in GameManager.discovered_notes:
-		add_discovered_note(note)
 		
 func add_discovered_note(note: String):
-	var color = GameManager.color_note_pairs[note]['color']
-	var discovered_note = ColorRect.new()
-	discovered_note.color = color
-	discovered_note.custom_minimum_size = Vector2(150, 150)
-	discovered_notes_display.add_child(discovered_note)
+	var rect = _discovered_colors.filter(func(rect): return rect.get_meta("note") == note)[0]
+	var color = GameManager.color_note_pairs[note]['color'] # Ova realno treba da e funkcija
+	
+	if rect:
+		rect.color = Color(color.r, color.g, color.b, 1.0)

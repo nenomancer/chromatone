@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b7ld37g4ndx1g"]
+
+[ext_resource type="StyleBox" uid="uid://7sakgupwpreo" path="res://scenes/button_texture.tres" id="1_o07q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m605l"]
+bg_color = Color(0.121143, 0.289171, 0.249689, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.137756, 0.621715, 0.497935, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[resource]
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_m605l")
+Button/styles/normal = ExtResource("1_o07q6")
+Button/styles/pressed = ExtResource("1_o07q6")

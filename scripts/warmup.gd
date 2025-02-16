@@ -20,12 +20,14 @@ func load_info() -> void:
 	_info = GameManager.INFO.instantiate()
 	add_child(_info)
 
-func on_warmup_guess(note) -> void:
+func on_warmup_guess(button: Button) -> void:
+	var note = button.get_meta("note")
 	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)
 	_buttons.disable_buttons()
 
 	if (GameManager.current_note == note || GameManager.current_round - GameManager.discovered_notes.size() >= 3):
 		GameManager.add_discovered_note(note)
+		GameManager.show_notification_popup(button)
 		GameManager.assign_warmup_notes()
 	
 	end_round()

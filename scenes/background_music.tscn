@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://civ6sd35fssuk"]
+[gd_scene load_steps=4 format=3 uid="uid://civ6sd35fssuk"]
 
 [ext_resource type="AudioStream" uid="uid://bg3eghimkyw3j" path="res://sounds/background/bg_music.wav" id="1_4m6xr"]
+[ext_resource type="Shader" uid="uid://crl47dsbvqy1m" path="res://scenes/background_shader.tres" id="2_c2dt4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knuru"]
+shader = ExtResource("2_c2dt4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_4m6xr")
 volume_db = -8.0
 autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_knuru")
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 1176.0
+offset_bottom = 2004.0

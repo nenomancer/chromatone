@@ -36,7 +36,8 @@ func load_guess_counter() -> void:
 	_guess_counter = GameManager.GUESS_COUNTER.instantiate()
 	add_child(_guess_counter)
 	
-func on_level_guess(note) -> void:
+func on_level_guess(button) -> void:
+	var note = button.get_meta("note")
 	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)
 	_player_melody.append(note)
 	

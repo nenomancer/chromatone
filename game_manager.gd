@@ -3,7 +3,7 @@ extends Node
 signal round_changed
 signal level_changed
 signal score_changed
-signal note_discovered
+signal note_discovered(note: String)
 
 var available_notes: Array = ["C", "D", "E", "F", "G", "A", "B"]
 var available_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.ORANGE, Color.CYAN]
@@ -51,7 +51,7 @@ var _note_audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 const LEVELS: String = "res://scenes/levels.tscn"
 const WARMUP: String = "res://scenes/warmup.tscn"
 const MAIN: String = "res://scenes/main.tscn"
-const DIALOGUE: String = "res://scenes/dialogue.tscn"
+const DIALOGUE: String = "res://scenes/after_level.tscn"
 const BUTTONS = preload("res://scenes/buttons.tscn")
 const INFO = preload("res://scenes/info.tscn")
 const GUESS_COUNTER = preload("res://scenes/guess_counter.tscn")
@@ -82,9 +82,8 @@ func play_note(note: String, type: SOUNDS) -> void:
 		_note_audio_player.play()
 
 func assign_warmup_notes():
-	print("SIZE: ", warmup_notes.size())
 	var other_notes = available_notes.filter(func(note): return note not in warmup_notes)
-	for i in range(warmup_notes.size() + 1):
+	for i in range(mini(warmup_notes.size() + 1, 2)):
 		var note = get_random_note(other_notes)
 		warmup_notes.append(note)
 		
@@ -93,7 +92,7 @@ func get_random_note(_note_array) -> String:
 
 func add_discovered_note(note: String):
 	discovered_notes.append(note)
-	emit_signal("note_discovered")
+	emit_signal("note_discovered", note)
 	
 func get_undiscovered_notes() -> Array:
 	return available_notes.filter(func(element): return not discovered_notes.has(element))
@@ -139,3 +138,25 @@ func get_melody() -> Array:
 		previous_note = note
 		melody.append(note)
 	return melody
+
+func show_notification_popup(button: Button):
+	var note = button.get_meta("note")
+	var color = button.modulate
+	var position = button.position
+	var label = Label.new()
+	
+	label.text = note + " Discovered!"
+	label.z_index = 1
+	label.set("theme_override_colors/font_color", color)
+	label.set("theme_override_font_sizes/font_size", 32)
+	
+	#label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.position = Vector2(0, -200)
+	button.get_parent().get_parent().add_child(label)
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(label, "position", Vector2(0, -220), 1)
+	tween.tween_property(label, "modulate", Color(color.r, color.g, color.b, 0), 1)
+	
+	await tween.finished
+	label.queue_free()
