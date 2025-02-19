@@ -25,7 +25,7 @@ func on_warmup_guess(button: Button) -> void:
 	GameManager.play_note(note, GameManager.SOUNDS.ANSWER)
 	_buttons.disable_buttons()
 
-	if (GameManager.current_note == note || GameManager.current_round - GameManager.discovered_notes.size() >= 3):
+	if (GameManager.current_note == note):
 		GameManager.add_discovered_note(note)
 		GameManager.show_notification_popup(button)
 		GameManager.assign_warmup_notes()

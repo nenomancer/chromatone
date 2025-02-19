@@ -16,6 +16,8 @@ var current_level: int = 1
 var current_score: int = 0
 var current_note: String
 
+var note_discovery_thresholds = [120, 250, 400, 600, 850] # Thresholds for level 1-5
+
 var discovered_notes: Array = []
 var color_note_pairs: Dictionary = {}
 var _note_sound_map: Dictionary = {
@@ -66,7 +68,7 @@ func _ready() -> void:
 
 func generate_audio_player() -> void:
 	await get_tree().process_frame
-	#_note_audio_player.volume_db = -14.0 # Temporary
+	_note_audio_player.volume_db = -12.0 # Temporary
 	#_note_audio_player.pitch_scale = 7 # Add in future
 	
 	

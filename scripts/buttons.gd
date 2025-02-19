@@ -71,3 +71,5 @@ func enable_discovered_buttons():
 		if note in GameManager.discovered_notes:
 			_button.disabled = false
 		
+func get_button_by_note(note: String):
+	return _buttons.filter(func(button): return button.get_meta("note") == note)[0]
