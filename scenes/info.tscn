@@ -1,0 +1,130 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5b7ybfy6arfj"]
+
+[ext_resource type="Script" path="res://scripts/info.gd" id="1_bytdj"]
+
+[node name="Info" type="Control" node_paths=PackedStringArray("discovered_notes_display", "level_display", "round_display", "score_display")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_bytdj")
+discovered_notes_display = NodePath("MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay")
+level_display = NodePath("MarginContainer2/MarginContainer/Level/LevelDisplay")
+round_display = NodePath("MarginContainer2/MarginContainer/Round/RoundDisplay")
+score_display = NodePath("MarginContainer2/MarginContainer/Score/ScoreDisplay")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 241.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+
+[node name="MarginContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="Level" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Level:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_constants/margin_right = 8
+
+[node name="LevelDisplay" type="Label" parent="MarginContainer2/MarginContainer/Level"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 2
+
+[node name="Round" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Round:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_constants/margin_right = 8
+
+[node name="RoundDisplay" type="Label" parent="MarginContainer2/MarginContainer/Round"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 2
+
+[node name="Score" type="HBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Score:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_constants/margin_right = 8
+
+[node name="ScoreDisplay" type="Label" parent="MarginContainer2/MarginContainer/Score"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 2
+
+[node name="Discovered" type="VBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Discovered:"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
+theme_override_constants/margin_right = 32
+
+[node name="DiscoveredNotesDisplay" type="HBoxContainer" parent="MarginContainer2/MarginContainer/Discovered"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="MarginContainer2/MarginContainer/Discovered/DiscoveredNotesDisplay"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)

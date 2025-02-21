@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg1a3efqkm8ni"]
+
+[ext_resource type="Script" path="res://scripts/after_level.gd" id="1_fjkha"]
+
+[node name="Dialogue" type="Control" node_paths=PackedStringArray("discovered_notes_display", "next_level_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjkha")
+discovered_notes_display = NodePath("DiscoveredNotesDisplay")
+next_level_button = NodePath("StartLevel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = 409.0
+offset_right = 340.0
+offset_bottom = 846.0
+grow_horizontal = 2
+theme_override_constants/separation = 32
+
+[node name="Info1" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Congratulations! 
+"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Info2" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "You passed the warmup round, scored 123 points and discovered 3 notes!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Info3" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "You can try them out by clicking, or continue to the next level."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DiscoveredNotesDisplay" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -67.0
+offset_right = 164.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartLevel" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = 310.0
+offset_right = 270.0
+offset_bottom = 451.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Start Level 1"
